@@ -90,10 +90,13 @@
 			var now = new Date(/*2015, 4, 11, 19*/);
 			var hours = now.getHours();
 			if ( hours <= 18 ) {
-				document.body.className = 'day';
+				setThemeAs('day');
 			} else {
-				document.body.className = 'dark';
+				setThemeAs('dark');
 			}
+		}
+		function setThemeAs (theme) {
+			document.body.className = theme;
 		}
 		</script>
 	</head>
@@ -106,7 +109,7 @@
 						<div>
 							<div style='padding-top:10px;'>
 								<div style='float:left;margin-right:20px;'>
-									<div id='logo' style='background-size:300px 173px;height:173px;width:300px;' align='left'></div>
+									<div id='logo' onclick='setThemeAs( document.body.className === "day" ? "dark" : "day" )' style='background-size:300px 173px;height:173px;width:300px;' align='left'></div>
 									<div id='title' style='padding:13px 0;height:65px;border-top:3px solid;margin-top:13px'>
 										<div style='float:left;font-size:26px'>
 											2015<br>全球创新者大会
