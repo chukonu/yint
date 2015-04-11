@@ -2,13 +2,15 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=1111px, initial-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title>全球创新者大会 - 未来生活</title>
 		<style type='text/css'>
 			@import url(http://fonts.googleapis.com/css?family=Lato:300,700);
 			@import url(http://fonts.googleapis.com/css?family=Dosis);
 			body {
-				font-family: 'Lato', sans-serif, 'Microsoft JhengHei';
+				font-family: 'Lato', sans-serif;
+				margin:      0;
+				height:      100%;
 			}
 
 			#viewport {
@@ -20,10 +22,50 @@
 
 			.ctr-p { margin: 0 auto; min-width: 1111px;}
 
+			.dark {
+				color:             white;
+				background-color:  black;
+				border-color:      white;
+			}
+
+			.dark #building {
+				background: url(/images/Building-dark.png) no-repeat;
+			}
+			.dark #logo {
+				background: url(/images/FutureLiving-dark.png) no-repeat;
+			}
+			.dark .card a:link, a:visited {
+				color:   white;
+			}
+			.dark .card a:link:active, a:visited:active {
+				color:   grey;
+			}
+
+			.day {
+				color:             black;
+				background-color:  white;
+				border-color:      white;
+			}
+
+			.day #building {
+				background: url(/images/Building-w.png) no-repeat;
+			}
+
+			.day #logo {
+				background: url(/images/FutureLiving-w.png) no-repeat;
+			}
+			
+			.day .card a:link, a:visited {
+				color:   black;
+			}
+			.day .card a:link:active, a:visited:active {
+				color:   grey;
+			}
+
 		</style>
 	</head>
 
-	<body style='margin:0;height:100%'>
+	<body class='dark'>
 		<div id='viewport' class='ctr-p'>
 			<div class='content' style='padding-bottom:35px'>
 				<style>
@@ -50,8 +92,8 @@
 						<div>
 							<div style='padding-top:10px;'>
 								<div style='float:left;margin-right:20px;'>
-									<div style='background:url(/images/FutureLiving-w.png) no-repeat;background-size:300px 173px;height:173px;width:300px;' align='left'></div>
-									<div id='title' style='padding:13px 0;height:65px;border-top:3px solid black;margin-top:13px'>
+									<div id='logo' style='background-size:300px 173px;height:173px;width:300px;' align='left'></div>
+									<div id='title' style='padding:13px 0;height:65px;border-top:3px solid;margin-top:13px'>
 										<div style='float:left;font-size:26px'>
 											2015<br>全球创新者大会
 										</div>
@@ -61,7 +103,7 @@
 										</div>
 									</div>
 
-									<div style='font-family:"Dosis",monospace;padding:13px 0;height:65px;border-top:2px solid black;border-bottom:2px solid black'>
+									<div style='font-family:"Dosis",monospace;padding:13px 0;height:65px;border-top:2px solid;border-bottom:2px solid'>
 										<div style='float:left;font-size:24px;'>
 											北京<br><span style='letter-spacing:3px'>Beijing</span>
 										</div>
@@ -76,50 +118,58 @@
 											height:   78px;
 											padding-top:  13px;
 										}
+										
 									</style>
 									<div class='card'>
 										<div style='float:left'>
-											商务合作<br>Business Contact
+											商务合作<br>Business Enquiries
 										</div>
 
-										<div style='width:170px;float:right;text-align:right;padding-bottom:13px;border-bottom:1px solid black'>
-											白鹤<br>Bai He<br>baihe@y-int.com
+										<div style='width:170px;float:right;text-align:right;padding-bottom:13px;border-bottom:1px solid'>
+											白鹤<br>Bai He<br><a href='mailto:baihe@y-int.com'>baihe@y-int.com</a>
 										</div>
 									</div>
 
 									<div class='card'>
 										<div style='float:left'>
-											媒体合作<br>Media Contact
+											媒体合作<br>Media Enquires
 										</div>
 
-										<div style='width:170px;float:right;text-align:right;padding-bottom:13px;border-bottom:1px solid black'>
-											王文静<br>Wang Wenjing<br>wangwenjing@y-int.com
+										<div style='width:170px;float:right;text-align:right;padding-bottom:13px;border-bottom:1px solid'>
+											王文静<br>Wang Wenjing<br><a href='mailto:wenjing@y-int.com'>wenjing@y-int.com</a>
 										</div>
 									</div>
 
-									<div class='card' style='height:53px;border-bottom:1px solid black'>
+									<div class='card' style='height:53px;border-bottom:1px solid'>
 										<div style='float:left'>
 											联系电话<br>Phone
 										</div>
 
 										<div style='float:right;text-align:right;'>
-											(86 10)65542128
+											(86 10) 6554 2128
 										</div>
 									</div>
 
 								</div>
 
 								<div style='float:left;padding-top:40px'>
-									<div style='background:url(/images/Building-w.png) no-repeat;background-size:791px 624px;height:624px;width:791px;'></div>
+									<div id='building' style='background-size:791px 624px;height:624px;width:791px;'></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</span>
 
-				<div id='footer' class='ctr-p'>
-					<div class='ctr-p wrapper'><b>Copyright &copy; 2015 Y-INT.COM</b> Y星人数字科技有限公司<br>京ICP备1237674816号</div>
-				</div>
+				<div id='footer' class=''>
+					<div class='wrapper' style='margin:0 auto'>
+						<div style='float:left'>
+							<b>Copyright &copy; 2015 Y-INT.COM</b><!-- Y星人数字科技有限公司 --><br>京 ICP 备 09050722 号
+						</div>
+
+						<div class='' style='float:right;background:url(/images/abac-logo.png) no-repeat;background-size:94.10px 33px;height:33px;width:94.10px'>
+						</div> <!--/ABAC LOGO -->
+					</div>
+				</div> <!-- /#footer -->
 			</div>
 		</div>
 	</body>
