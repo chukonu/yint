@@ -1,12 +1,15 @@
+<!DOCTYPE html>
 <html lang='zh-cn'>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title>全球创新者大会 - 未来生活</title>
+		<meta name="description" content="Future Living - 2015 Global Innovators Conference, July 8 - 10, Beijing.">
+		<meta name="author" content="Y星人">
 		<style type='text/css'>
-			@import url(http://fonts.googleapis.com/css?family=Lato:300,700);
-			@import url(http://fonts.googleapis.com/css?family=Dosis);
+			@import url(http://fonts.useso.com/css?family=Lato:300,700);
+			@import url(http://fonts.useso.com/css?family=Dosis);
 			body {
 				font-family: 'Lato', sans-serif;
 				margin:      0;
@@ -21,7 +24,24 @@
 			}
 
 			.ctr-p { margin: 0 auto; min-width: 1111px;}
+			#footer {
+				bottom:   0;
+				height:   45px;
+				width:    100%;
+				position: absolute;
 
+				font-size:   small;
+			}
+			#body, #footer { display: block }
+
+			.wrapper {
+				width: 1111px;
+				padding: 0 40px;
+			}
+			.card {
+				height:   78px;
+				padding-top:  13px;
+			}
 			.dark {
 				color:             white;
 				background-color:  black;
@@ -63,30 +83,22 @@
 			}
 
 		</style>
+		<script type="text/javascript">
+		function set () {
+			var now = new Date(/*2015, 4, 11, 19*/);
+			var hours = now.getHours();
+			if ( hours <= 18 ) {
+				document.body.className = 'day';
+			} else {
+				document.body.className = 'dark';
+			}
+		}
+		</script>
 	</head>
 
-	<body class='dark'>
+	<body onpageshow='set()'>
 		<div id='viewport' class='ctr-p'>
 			<div class='content' style='padding-bottom:35px'>
-				<style>
-					#footer {
-						/* background-color: grey; */
-
-						bottom:   0;
-						height:   45px;
-						width:    100%;
-						position: absolute;
-
-						font-size:   small;
-					}
-					#body, #footer { display: block }
-
-					.wrapper {
-						width: 1111px;
-						padding: 0 40px;
-					}
-
-				</style>
 				<span id='body' class='ctr-p'>
 					<div class='ctr-p wrapper' style='height:684px;margin-top:10px;'>
 						<div>
@@ -113,13 +125,6 @@
 										</div>
 									</div>
 
-									<style>
-										.card {
-											height:   78px;
-											padding-top:  13px;
-										}
-										
-									</style>
 									<div class='card'>
 										<div style='float:left'>
 											商务合作<br>Business Enquiries
@@ -132,7 +137,7 @@
 
 									<div class='card'>
 										<div style='float:left'>
-											媒体合作<br>Media Enquires
+											媒体合作<br>Media Enquiries
 										</div>
 
 										<div style='width:170px;float:right;text-align:right;padding-bottom:13px;border-bottom:1px solid'>
@@ -166,8 +171,8 @@
 							<b>Copyright &copy; 2015 Y-INT.COM</b><!-- Y星人数字科技有限公司 --><br>京 ICP 备 09050722 号
 						</div>
 
-						<div class='' style='float:right;background:url(/images/abac-logo.png) no-repeat;background-size:94.10px 33px;height:33px;width:94.10px'>
-						</div> <!--/ABAC LOGO -->
+						<!--<div class='' style='float:right;background:url(/images/abac-logo.png) no-repeat;background-size:94.10px 33px;height:33px;width:94.10px'>
+						</div>--> <!--/ABAC LOGO -->
 					</div>
 				</div> <!-- /#footer -->
 			</div>
