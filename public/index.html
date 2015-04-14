@@ -13,7 +13,7 @@
 			@import url(http://fonts.useso.com/css?family=Lato:300,700);
 			@import url(http://fonts.useso.com/css?family=Dosis);
 			body {
-				font-family: 'Lato', 'Segoe UI', sans-serif, 'Heiti';
+				font-family: 'Lato', 'Segoe UI', sans-serif, 'SimHei';
 				margin:      0;
 				height:      100%;
 			}
@@ -35,6 +35,13 @@
 				font-size:   small;
 			}
 			#body, #footer { display: block }
+            
+            #canvas-building {
+                /*height: 624px;
+                width: 791px;*/
+                position: absolute;
+                top: 40px;
+            }
 
 			.wrapper {
 				width: 1111px;
@@ -51,7 +58,7 @@
 			}
 
 			.dark #building {
-				background: url(/images/Building-dark.png) no-repeat;
+				background: url(/images/canvas/Building-dark.png) no-repeat;
 			}
 			.dark #logo {
 				background: url(/images/FutureLiving-dark.png) no-repeat;
@@ -70,7 +77,7 @@
 			}
 
 			.day #building {
-				background: url(/images/Building-w.png) no-repeat;
+				background: url(/images/canvas/Building-w.png) no-repeat;
 			}
 
 			.day #logo {
@@ -89,7 +96,7 @@
 		function set () {
 			var now = new Date(/*2015, 4, 11, 19*/);
 			var hours = now.getHours();
-			if ( hours <= 18 ) {
+			if ( hours < 19 && hours > 5 ) {
 				setThemeAs('day');
 			} else {
 				setThemeAs('dark');
@@ -120,7 +127,7 @@
 										</div>
 									</div>
 
-									<div style='font-family:"Dosis",monospace;padding:13px 0;height:65px;border-top:2px solid;border-bottom:2px solid'>
+									<div style='font-family:"Dosis",monospace,"SimHei";padding:13px 0;height:65px;border-top:2px solid;border-bottom:2px solid'>
 										<div style='float:left;font-size:24px;'>
 											北京<br><span style='letter-spacing:3px'>Beijing</span>
 										</div>
@@ -162,9 +169,135 @@
 
 								</div>
 
-								<div style='float:left;padding-top:40px'>
+								<div style='float:left;padding-top:40px;position:relative'>
+									
 									<div id='building' style='background-size:791px 624px;height:624px;width:791px;'></div>
+									<canvas id="canvas-building" width="791" height="624"></canvas>
 								</div>
+                                <script>
+                                    var img = new Image();
+                                    var canvas = document.getElementById('canvas-building');
+                                    var ctx = canvas.getContext('2d');
+                                    
+                                    var spaceshipsReady = 0;
+                                    
+                                    var Orbit = function (x, y, vx, vy) {
+                                        this.x = this.x_end = this.x_init = x;
+                                        this.y = this.y_end = this.y_init = y;
+                                        this.vx = vx;
+                                        this.vy = vy;
+                                        this.color = document.body.className === "day" ? "#fff" : "#1eaabc";
+                                        return this;
+                                    };
+                                    
+                                    Orbit.prototype.draw = function () {
+                                        ctx.save();
+                                        ctx.strokeStyle = this.color;
+                                        ctx.lineWidth = 1.5;
+                                        ctx.beginPath();
+                                        ctx.moveTo(this.x, this.y);
+                                        ctx.lineTo(this.x_end + this.vx, this.y_end + this.vy);
+                                        this.x_end += this.vx; 
+                                        this.y_end += this.vy;
+                                        ctx.stroke();
+                                        ctx.closePath();
+                                        ctx.restore();
+                                    };
+                                    
+                                    Orbit.prototype.erase = function () {
+                                        ctx.save();
+                                        ctx.strokeStyle = this.color;
+                                        ctx.lineWidth = 1.2;
+                                        ctx.beginPath();
+                                        ctx.moveTo(this.x_end, this.y_end);
+                                        ctx.lineTo(this.x + this.vx, this.y + this.vy);
+                                        this.x += this.vx; 
+                                        this.y += this.vy;
+                                        ctx.stroke();
+                                        ctx.closePath();
+                                        ctx.restore();
+                                    };
+                                    
+                                    Orbit.prototype.hasVanished = function () {
+                                        if (this.x >= canvas.width || this.x < 0) {
+                                            return true;
+                                        }
+                                        return false;
+                                    };
+                                    
+                                    var Spaceship = function (x, y, vx, vy, filename, trail) {
+                                        this.x = this.x_init = x;
+                                        this.y = this.y_init = y;
+                                        this.vx = vx;
+                                        this.vy = vy;
+                                        this.img = new Image();
+                                        this.img.src = '/images/canvas/' + filename + '.png';
+                                        this.trail = trail;
+                                    };
+                                    
+                                    Spaceship.prototype.hasEmergedCompletely = function () {
+                                        return true;
+                                    };
+                                    
+                                    Spaceship.prototype.draw = function () {
+                                        if (this.trail.hasVanished()) {
+                                            this.x = this.x_init;
+                                            this.y = this.y_init;
+                                            this.trail.x = this.trail.x_end = this.trail.x_init;
+                                            this.trail.y = this.trail.y_end = this.trail.y_init;
+                                            this.trail.color = document.body.className === "day" ? "#1eaabc" : "#fff" ;
+                                        }
+                                        ctx.save();
+                                        ctx.drawImage(this.img, this.x, this.y, 40, 40);
+                                        this.x += this.vx;
+                                        this.y += this.vy;
+                                        ctx.restore();
+                                    };
+                                    
+                                    var orbit1 = new Orbit(200, 251, .64, .24);
+                                    var orbit2 = new Orbit(674, 320, -.64, .22);
+                                    var spaceship1 = new Spaceship(191, 235, .64, .24, 'l2r', orbit1);
+                                    var spaceship2 = new Spaceship(643, 304, -.64, .22, 'r2l', orbit2);
+                                    
+                                    
+                                    function draw () {
+                                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                        
+                                        spaceship1.draw();
+                                        spaceship2.draw();
+                                        
+                                        if (spaceship1.hasEmergedCompletely()) {
+                                            if (orbit1.x_end >= canvas.width) {
+                                                orbit1.erase();
+                                            } else {
+                                                orbit1.draw();
+                                            }
+                                        }
+                                        
+                                        
+                                        if (orbit2.x_end < 0) {
+                                            orbit2.erase();
+                                        } else {
+                                            orbit2.draw();
+                                        }
+                                        
+                                        window.requestAnimationFrame(draw);
+                                    }
+                                    
+                                    spaceship1.img.onload = function () {
+                                        spaceshipsReady++;
+                                        if (spaceshipsReady > 1) {
+                                            window.requestAnimationFrame(draw);
+                                        }
+                                    };
+                                    
+                                    spaceship2.img.onload = function () {
+                                        spaceshipsReady++;
+                                        if (spaceshipsReady > 1) {
+                                            window.requestAnimationFrame(draw);
+                                        }
+                                    };
+                                </script>
 							</div>
 						</div>
 					</div>
